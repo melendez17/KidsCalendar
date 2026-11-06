@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#3657cf">
+    <meta name="description"
+        content="Kids Calendar ayuda a niños de 7 a 12 años y sus familias a organizar tareas, recordar entregas y celebrar sus logros.">
+    <title>Kids Calendar · Pequeños pasos, grandes hábitos</title>
+    <link rel="stylesheet" href="/site.css">
+</head>
+
+<body>
+    <header>
+        <div class="nav"><a class="brand" href="/">Kids <span>Calendar</span> ✦</a>
+            <nav aria-label="Principal"><a class="about-link" href="#como-funciona">Cómo funciona</a><a
+                    href="/login">Iniciar sesión</a><a class="button" href="/registro">Crear cuenta</a></nav>
+        </div>
+    </header>
+    <main>
+        <section class="container hero">
+            <div class="hero-copy">
+                <h1>Sus tareas en orden.<br><em>Su tiempo para crecer.</em></h1>
+                <p>Una agenda que acompaña a niños y niñas de 7 a 12 años a organizarse, cumplir sus tareas y celebrar
+                    cada pequeño logro.</p>
+                <div class="actions"><a class="button" href="/registro">Empezar en familia →</a><a
+                        class="button secondary" href="#como-funciona">Conocer Kids Calendar</a></div>
+                <p class="fine">Calendario, recordatorios y un recreo de aventuras. Todo en un lugar.</p>
+            </div>
+            <div class="preview" aria-label="Ejemplo ilustrativo del dashboard">
+                <div class="preview-inner">
+                    <div class="preview-head">
+                        <h2>¡Hoy puedes con todo! ☀️</h2><span class="pill">⭐ 10 estrellas</span>
+                    </div>
+                    <p class="fine">Tu próxima aventura empieza con un pequeño paso.</p>
+                    <div class="week">
+                        <div>Lun<strong>9</strong></div>
+                        <div>Mar<strong>10</strong></div>
+                        <div class="active">Mié<strong>11</strong></div>
+                        <div>Jue<strong>12</strong></div>
+                        <div>Vie<strong>13</strong></div>
+                    </div>
+                    <div class="demo-task"><span class="dot" style="background:#e9edff"></span>
+                        <div><strong>Practicar las multiplicaciones</strong><small>Matemáticas · 4:00 p. m.</small>
+                        </div>
+                    </div>
+                    <div class="demo-task"><span class="dot" style="background:#fff0d3"></span>
+                        <div><strong>Leer una nueva historia</strong><small>Lengua · 5:00 p. m.</small></div>
+                    </div>
+                    <div class="preview-note">🌱 Una tarea a la vez. ¡Vas por buen camino!</div>
+                    <p class="fine" style="margin-bottom:0">Vista de ejemplo. Tu agenda comienza vacía.</p>
+                </div>
+            </div>
+        </section>
+        <!-- Una muestra interactiva explica la experiencia sin modificar la agenda real. -->
+        <section class="container section adventure" id="como-funciona" aria-labelledby="adventure-title">
+            <div class="adventure-heading">
+                <h2 id="adventure-title">Organizarte es una aventura.<br><span>¡Y tú llevas el mapa!</span></h2>
+                <p>Una misión pequeña, un logro enorme. Mira cómo tus tareas se convierten en momentos para celebrar.
+                </p>
+            </div>
+            <div class="mission-board">
+                <div class="mission-story"><span class="mission-mascot" aria-hidden="true">🎒</span>
+                    <h3>¿Qué aventura<br> te espera hoy?</h3>
+                    <p>Elige tu tarea, ponle fecha y avanza a tu ritmo. Todo empieza con un «¡yo puedo!».</p>
+                    <div class="subject-samples" aria-label="Ejemplos de materias"><span><i
+                                style="background:#b9c9f4"></i>Matemáticas</span><span><i
+                                style="background:#f1d77e"></i>Lengua</span><span><i
+                                style="background:#abd09a"></i>Ciencias</span></div>
+                </div>
+                <div class="mission-demo">
+                    <div class="mission-top"><strong>Tu misión de ejemplo</strong><span class="demo-star"
+                            id="demo-stars">⭐ 0 estrellas</span></div>
+                    <p class="demo-invitation">Toca una tarea. ¡Mira lo que pasa!</p><button class="demo-check"
+                        type="button" aria-pressed="false"><span class="check-box"
+                            aria-hidden="true"></span><span><strong>Dominar las
+                                multiplicaciones</strong><small>Matemáticas · practicar 10 minutos</small></span><span
+                            class="demo-reward">+10 ⭐</span></button><button class="demo-check" type="button"
+                        aria-pressed="false"><span class="check-box" aria-hidden="true"></span><span><strong>Descubrir
+                                una nueva historia</strong><small>Lengua · leer un capítulo</small></span><span
+                            class="demo-reward">+10 ⭐</span></button>
+                    <div class="demo-feedback" id="demo-feedback" role="status" aria-live="polite">🌱 Cada pequeño paso
+                        cuenta. ¿Probamos el primero?</div>
+                    <p class="demo-disclaimer">Es una demostración: las estrellas de tu cuenta se ganan en tu agenda.
+                    </p>
+                </div>
+            </div>
+            <div class="adventure-extras">
+                <article class="reminder-story">
+                    <div class="reminder-visual" aria-hidden="true"><span class="bell-bubble">🔔</span>
+                        <div class="reminder-message"><strong>¡Tu próxima aventura!</strong><span>Leer un capítulo · hoy
+                                a las 5:00</span></div>
+                    </div>
+                    <h3>Un empujoncito para recordar.</h3>
+                    <p>Tu calendario te ayuda a ver lo que viene. Activa los avisos del navegador y recibe recordatorios
+                        con la aplicación abierta.</p>
+                </article>
+                <article class="reward-story">
+                    <div class="reward-visual" aria-hidden="true"><span class="reward-ticket">⭐ 1 estrella</span><span
+                            class="reward-arrow">→</span><span class="reward-ticket play-ticket">🎮 1 partida</span>
+                    </div>
+                    <h3>¡Misión cumplida, diversión ganada!</h3>
+                    <p>Completa una tarea por primera vez y gana 10 estrellas. Salta obstáculos, vuela entre tubos o
+                        atrapa estrellas: tú eliges tu recreo.</p>
+                    <div class="game-peeks" aria-label="Tres minijuegos disponibles"><span>🦖 Dino salto</span><span>🐤
+                            Vuelo entre tubos</span><span>🧺 Lluvia de estrellas</span></div>
+                </article>
+            </div>
+        </section>
+        <section class="container section family-section">
+            <div class="family">
+                <div>
+                    <div class="family-faces" aria-hidden="true">🙌 🌱</div>
+                    <h2>Yo lo intento.<br>Tú me acompañas.</h2>
+                    <p>Un espacio para que los niños ganen autonomía y los adultos celebren sus avances. La vista de
+                        supervisión reúne pendientes e historial en la misma cuenta familiar.</p><a href="/registro"
+                        class="family-link">Empezar este camino juntos →</a>
+                </div>
+                <ol class="family-path">
+                    <li><span class="path-dot" aria-hidden="true">1</span>
+                        <div><strong>Creen su cuenta en familia</strong>
+                            <p>Un adulto se registra con su nombre, correo y contraseña.</p>
+                        </div>
+                    </li>
+                    <li><span class="path-dot" aria-hidden="true">2</span>
+                        <div><strong>Preparen la primera misión</strong>
+                            <p>Añadan una tarea, elijan su materia y pongan una fecha.</p>
+                        </div>
+                    </li>
+                    <li><span class="path-dot" aria-hidden="true">3</span>
+                        <div><strong>¡Celebren cada «lo conseguí»!</strong>
+                            <p>Vean el progreso, sumen estrellas y disfruten los juegos.</p>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </section>
+        <section class="container">
+            <div class="cta playful-cta"><span class="cta-decoration left" aria-hidden="true">✦</span><span
+                    class="cta-decoration right" aria-hidden="true">✦</span><span class="cta-emoji"
+                    aria-hidden="true">🚀</span>
+                <h2>Tu próxima aventura<br>empieza con un pequeño paso.</h2>
+                <p>Una tarea, un logro y muchas ganas de seguir creciendo.</p><a class="button" href="/registro">¡Vamos
+                    a organizar la primera misión! →</a>
+                <p class="fine">Crea tu cuenta con una persona adulta.</p>
+            </div>
+        </section>
+        <script src="js/index.js"></script>
+    </main>
+    <footer>Kids Calendar · Pensado para aprender, crecer y disfrutar en familia.</footer>
+</body>
+
+</html>

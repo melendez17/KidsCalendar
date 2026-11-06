@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#4866df">
+    <title>Kids Calendar · Un pequeño paso, un gran día</title>
+    <link rel="stylesheet" href="styles/dashboard.css">
+</head>
+
+<body hidden>
+    <header>
+        <div class="header-inner">
+            <div class="brand"><span class="brand-icon" aria-hidden="true">▦</span> Kids Calendar <span
+                    aria-hidden="true" style="color:#eeae30">✦</span></div>
+            <div class="header-actions"><span id="account-name" style="align-self:center;font-size:14px"></span><button
+                    id="logout">Cerrar sesión</button><button id="supervision" aria-pressed="false">👪 Vista de
+                    supervisión</button><button class="primary" id="add-top">＋ Nueva tarea</button></div>
+        </div>
+    </header>
+    <div class="layout">
+        <aside class="sidebar" aria-label="Calendario y materias">
+            <section class="panel">
+                <div class="month-head">
+                    <h2 id="month-label"></h2>
+                    <div><button class="icon-button" id="prev" aria-label="Mes anterior">‹</button><button
+                            class="icon-button" id="next" aria-label="Mes siguiente">›</button></div>
+                </div>
+                <div class="calendar" id="calendar"></div>
+                <p class="legend">• Un puntito, una aventura pendiente</p><button class="reminder"
+                    id="today-button">Volver a hoy</button><button class="reminder" id="reminders">♧ Activar
+                    recordatorios</button>
+                <p class="muted" style="font-size:11px;line-height:1.5;margin:10px 0 0">Los avisos funcionan con esta
+                    página abierta.</p>
+            </section>
+            <section class="panel">
+                <h2 style="font-size:17px">Mis materias</h2>
+                <div class="subject-list" id="subjects"></div><button class="reminder" id="add-subject">Crear
+                    materia</button>
+            </section>
+            <section class="tip">
+                <div style="font-size:27px;margin-bottom:12px">🌱</div>
+                <h3 style="font-size:17px;margin-bottom:8px">Un poquito cada día</h3>
+                <p>Las grandes cosas empiezan con pequeños pasos. ¡Una tarea a la vez!</p>
+            </section>
+        </aside>
+        <main class="main">
+            <div class="welcome">
+                <div>
+                    <div class="date" id="date-label"></div>
+                    <h1 style="margin-top:13px">¡Hoy puedes con todo! <span style="font-size:.8em">☀️</span></h1>
+                    <p class="muted">Organiza tus aventuras y haz espacio para jugar.</p>
+                </div>
+            </div>
+            <p id="sync-status" class="muted" role="status" style="font-size:12px"></p><button id="download-pending"
+                hidden>Descargar cambios pendientes</button>
+            <div id="storage-warning" class="notice" role="alert" hidden></div>
+            <section class="stats" aria-label="Tu progreso">
+                <div class="stat"><span class="stat-icon">⭐</span>
+                    <div><strong id="points">0</strong><small>estrellas ganadas hoy</small></div>
+                </div>
+                <div class="stat"><span class="stat-icon">🔥</span>
+                    <div><strong id="streak">0 días</strong><small>racha de días cumplidos</small></div>
+                </div>
+                <div class="stat"><span class="stat-icon">🌿</span>
+                    <div class="progress-wrap"><strong id="daily-progress">0 / 0</strong><small>tareas de hoy
+                            completadas</small>
+                        <div class="progress" role="progressbar" aria-label="Progreso de hoy" aria-valuemin="0"
+                            aria-valuemax="100" aria-valuenow="0" id="progressbar"><span id="progress-fill"></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="panel pomodoro" id="pomodoro" data-phase="focus" aria-labelledby="pomodoro-title">
+                <div>
+                    <span class="pomodoro-phase" id="pomodoro-phase">Concentración</span>
+                    <h2 id="pomodoro-title">Mi pausa Pomodoro</h2>
+                    <p class="muted" id="pomodoro-message" role="status">Elige una tarea. Tienes 25 minutos para avanzar
+                        a tu ritmo.</p>
+                </div>
+                <div class="pomodoro-dial" id="pomodoro-dial">
+                    <div class="pomodoro-clock" id="pomodoro-clock" role="timer" aria-label="Tiempo restante">25:00
+                    </div>
+                </div>
+                <div class="pomodoro-controls">
+                    <button type="button" class="primary" id="pomodoro-toggle">Empezar concentración</button>
+                    <button type="button" class="pomodoro-next" id="pomodoro-next">Terminar y seguir →</button>
+                    <button type="button" id="pomodoro-reset">Reiniciar</button>
+                </div>
+            </section>
+            <section class="panel tasks-panel" id="child-view">
+                <div class="section-head">
+                    <h2 id="list-title">Mis tareas</h2><button class="primary" id="add">＋ Nueva tarea</button>
+                </div>
+                <div class="tabs" role="group" aria-label="Filtrar tareas"><button class="tab active" data-view="today"
+                        aria-pressed="true">Hoy</button><button class="tab" data-view="upcoming"
+                        aria-pressed="false">Próximas</button><button class="tab" data-view="done"
+                        aria-pressed="false">Completadas</button></div>
+                <div id="overdue-note" class="notice" hidden></div>
+                <div id="task-list"></div>
+            </section>
+            <section class="panel" id="parent-view" hidden>
+                <h2>Una mirada a su progreso 👪</h2>
+                <p class="muted">Cada pequeño esfuerzo cuenta. Este es el historial de todas las tareas.</p>
+                <div class="super-stats" id="parent-stats"></div>
+                <div class="table-scroll">
+                    <table class="history">
+                        <thead>
+                            <tr>
+                                <th>Tarea</th>
+                                <th>Entrega</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history"></tbody>
+                    </table>
+                </div>
+                <p class="muted" style="font-size:12px;margin-top:20px">La vista de supervisión es un filtro, sin
+                    contraseña. Los datos se guardan en tu cuenta familiar.</p>
+            </section>
+            <section class="panel arcade" aria-labelledby="arcade-title">
+                <div class="arcade-intro">
+                    <div>
+                        <h2 id="arcade-title">Tu recreo de aventuras 🎮</h2>
+                        <p class="muted" style="margin:0">Una tarea cumplida, nuevas oportunidades para jugar.</p>
+                    </div>
+                    <div class="turn-wallet"><strong>⭐ <span id="game-balance">0</span></strong> turnos disponibles
+                    </div>
+                </div>
+                <p class="muted" style="font-size:13px;margin-top:14px">Has ganado <span id="game-earned">0</span>
+                    estrellas en total. Cada partida cuesta 1 ⭐, no tiene límite de tiempo y aumenta de velocidad. Los
+                    puntos de juego no generan estrellas.</p>
+                <div class="game-grid">
+                    <article class="game-card"><span class="game-icon" aria-hidden="true">🦖</span>
+                        <h3>Dino salto</h3>
+                        <p>Salta los obstáculos y llega lo más lejos posible.</p><small id="record-runner">Récord:
+                            0</small><button class="primary" id="play-runner">Elegir juego · 1 ⭐</button>
+                    </article>
+                    <article class="game-card"><span class="game-icon" aria-hidden="true">🐤</span>
+                        <h3>Vuelo entre tubos</h3>
+                        <p>Un toque, un aleteo. Encuentra el camino entre los tubos.</p><small id="record-pipes">Récord:
+                            0</small><button class="primary" id="play-pipes">Elegir juego · 1 ⭐</button>
+                    </article>
+                    <article class="game-card"><span class="game-icon" aria-hidden="true">🧺</span>
+                        <h3>Lluvia de estrellas</h3>
+                        <p>Mueve tu cesta y recoge estrellas antes de que caigan.</p><small id="record-catch">Récord:
+                            0</small><button class="primary" id="play-catch">Elegir juego · 1 ⭐</button>
+                    </article>
+                </div>
+                <p id="arcade-status" role="status" class="muted" style="font-size:13px;margin:18px 0 0"></p>
+            </section>
+            <p class="bottom-note">Hecho para aprender, crecer y disfrutar. Un día a la vez. ✨</p>
+        </main>
+    </div>
+    <!-- Formulario compartido para crear y editar. El diálogo conserva el foco del teclado. -->
+    <dialog id="task-dialog" aria-labelledby="dialog-title">
+        <form id="task-form">
+            <div class="dialog-head">
+                <h2 id="dialog-title">Una nueva aventura ✏️</h2><button type="button" class="icon-button"
+                    id="close-dialog" aria-label="Cerrar formulario">×</button>
+            </div><label>¿Qué tienes que hacer?<input id="title" required maxlength="120"
+                    placeholder="Por ejemplo: leer un capítulo" autocomplete="off"></label><label>Descripción
+                (opcional)<textarea id="description" maxlength="2000" rows="4"
+                    placeholder="Instrucciones, páginas o materiales que necesitas"></textarea></label><label>Materia<select
+                    id="subject" required></select></label>
+            <div class="form-row"><label>Fecha de entrega<input id="due-date" type="date" required></label><label>Hora
+                    de entrega<input id="due-time" type="time" required></label></div><label>¿Qué tan importante
+                es?<select id="priority">
+                    <option value="low">🙂 Baja · con calma</option>
+                    <option value="medium" selected>😊 Media · paso a paso</option>
+                    <option value="high">🤩 Alta · va primero</option>
+                </select></label>
+            <p id="form-error" role="alert" class="late" hidden></p>
+            <div class="form-actions"><button type="button" id="cancel">Cancelar</button><button class="primary"
+                    type="submit">Guardar tarea</button></div>
+        </form>
+    </dialog>
+    <dialog id="subject-dialog" aria-labelledby="subject-dialog-title">
+        <form id="subject-form">
+            <h2 id="subject-dialog-title">Crear una materia</h2><label>Nombre de la materia<input id="subject-name"
+                    required maxlength="50" placeholder="Por ejemplo: Música"></label>
+            <fieldset class="palette-field">
+                <legend>Elige un color</legend>
+                <p class="muted" style="font-size:13px">Colores suaves para reconocer tus materias.</p>
+                <div class="palette-options"><label class="palette-option"><input type="radio" name="subject-palette"
+                            value="#d8e6fa" checked><span class="palette-swatch" style="background:#d8e6fa"
+                            aria-hidden="true"></span><span>Azul cielo</span></label><label
+                        class="palette-option"><input type="radio" name="subject-palette" value="#e9edff"><span
+                            class="palette-swatch" style="background:#e9edff" aria-hidden="true"></span><span>Azul
+                            lavanda</span></label><label class="palette-option"><input type="radio"
+                            name="subject-palette" value="#fff0d3"><span class="palette-swatch"
+                            style="background:#fff0d3" aria-hidden="true"></span><span>Amarillo sol</span></label><label
+                        class="palette-option"><input type="radio" name="subject-palette" value="#e7f3e2"><span
+                            class="palette-swatch" style="background:#e7f3e2" aria-hidden="true"></span><span>Verde
+                            manzana</span></label><label class="palette-option"><input type="radio"
+                            name="subject-palette" value="#ffebe5"><span class="palette-swatch"
+                            style="background:#ffebe5" aria-hidden="true"></span><span>Naranja
+                            durazno</span></label><label class="palette-option"><input type="radio"
+                            name="subject-palette" value="#ede6fa"><span class="palette-swatch"
+                            style="background:#ede6fa" aria-hidden="true"></span><span>Lila suave</span></label></div>
+            </fieldset>
+            <p id="subject-error" role="alert" hidden></p>
+            <div class="form-actions"><button type="button" id="cancel-subject">Cancelar</button><button class="primary"
+                    type="submit">Guardar materia</button></div>
+        </form>
+    </dialog>
+    <dialog id="delete-dialog" aria-labelledby="delete-title">
+        <h2 id="delete-title">¿Eliminar esta tarea?</h2>
+        <p>Se quitará de tu lista y de tu historial. Tus estrellas ganadas se conservan.</p>
+        <div class="form-actions"><button id="delete-cancel">Conservar</button><button id="delete-confirm"
+                class="primary">Sí, eliminar</button></div>
+    </dialog>
+    <dialog id="game-dialog" aria-labelledby="game-title" aria-describedby="game-hint">
+        <div class="dialog-head">
+            <h2 id="game-title">Tu aventura</h2><button class="icon-button" id="game-close"
+                aria-label="Salir del juego">×</button>
+        </div>
+        <p id="game-hint"></p><canvas id="game-canvas" width="600" height="340" tabindex="0"
+            aria-label="Zona de juego. Usa Espacio para saltar o volar; flechas izquierda y derecha para mover la cesta.">Tu
+            navegador necesita soporte de canvas para jugar.</canvas>
+        <p id="game-result" role="status"></p>
+        <div class="game-controls"><button id="game-start" class="primary">Comenzar · 1 estrella</button><button
+                id="game-pause" disabled>Pausar</button></div>
+    </dialog>
+    <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+    <script src="js/dashboard.js"></script>
+</body>
+
+</html>

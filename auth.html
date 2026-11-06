@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Tu cuenta · Kids Calendar</title>
+    <link rel="stylesheet" href="/site.css">
+</head>
+
+<body>
+    <header>
+        <div class="nav"><a class="brand" href="/">Kids <span>Calendar</span> ✦</a><a href="/">Volver al inicio</a>
+        </div>
+    </header>
+    <main class="auth-layout">
+        <section class="auth-story">
+            <h1>Los grandes hábitos empiezan con pequeños pasos.</h1>
+            <p>Una agenda para aprender a organizarse y una familia para acompañar el camino.</p>
+            <ul>
+                <li>Calendario y tareas por colores.</li>
+                <li>Progreso, estrellas y tres minijuegos.</li>
+                <li>Una agenda guardada para tu cuenta.</li>
+            </ul>
+            <p class="fine">La cuenta la administra un adulto. No necesitamos el nombre completo ni la fecha de
+                nacimiento del niño o niña.</p>
+        </section>
+        <section class="auth-panel">
+            <h2 id="auth-title">Tu cuenta familiar</h2>
+            <p class="fine" id="auth-intro"></p>
+            <form id="auth-form"><label id="name-label">Tu nombre (adulto)<input name="name" id="name"
+                        autocomplete="name" maxlength="60"></label><label>Correo del adulto<input name="email"
+                        type="email" id="email" required autocomplete="username"
+                        maxlength="254"></label><label>Contraseña<span class="password-row"><input name="password"
+                            id="password" type="password" required maxlength="128"
+                            aria-describedby="password-help"><button id="show-password" type="button"
+                            aria-pressed="false">Mostrar</button></span></label><small class="fine"
+                    id="password-help"></small><label class="consent" id="consent-label"><input id="consent"
+                        type="checkbox">Soy una persona adulta y administraré esta cuenta familiar. Entiendo que su
+                    información se guarda para organizar las tareas y el progreso.</label>
+                <div class="error" id="auth-error" role="alert" hidden></div><button type="submit"
+                    id="auth-submit">Continuar</button>
+            </form>
+            <p id="auth-status" class="fine" role="status"></p>
+            <p class="auth-switch" id="auth-switch"></p>
+        </section>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,11 @@
+const registration = location.pathname === '/registro';
+const $ = id => document.getElementById(id);
+$('auth-title').textContent = registration ? 'Empieza en familia' : '¡Qué bueno verte de nuevo!';
+$('auth-intro').textContent = registration ? 'Crea una cuenta y prepara su próxima aventura.' : 'Entra para continuar con tus tareas y aventuras.';
+$('name-label').hidden = !registration; $('name').required = registration; $('consent-label').hidden = !registration; $('consent').required = registration;
+$('password').autocomplete = registration ? 'new-password' : 'current-password'; $('password').minLength = registration ? 12 : 1;
+$('password-help').textContent = registration ? 'Usa entre 12 y 128 caracteres. Una frase larga es fácil de recordar.' : 'Introduce la contraseña de tu cuenta familiar.';
+$('auth-submit').textContent = registration ? 'Crear cuenta y entrar' : 'Entrar a mi agenda';
+$('auth-switch').innerHTML = registration ? '¿Ya tienes cuenta? <a href="/login">Inicia sesión</a>' : '¿Primera vez aquí? <a href="/registro">Crea tu cuenta</a>';
+$('show-password').onclick = () => { const show = $('password').type === 'password'; $('password').type = show ? 'text' : 'password'; $('show-password').textContent = show ? 'Ocultar' : 'Mostrar'; $('show-password').setAttribute('aria-pressed', show) };
+$('auth-form').onsubmit = async e => { e.preventDefault(); $('auth-error').hidden = true; $('auth-submit').disabled = true; $('auth-status').textContent = 'Un momento, preparando tu agenda…'; try { const response = await fetch(registration ? '/api/register' : '/api/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: $('name').value.trim(), email: $('email').value.trim(), password: $('password').value, consent: $('consent').checked }) }); const data = await response.json(); if (!response.ok) throw Error(data.error); location.assign('/dashboard') } catch (error) { $('auth-error').textContent = error.message === 'Failed to fetch' ? 'No pudimos conectar. Revisa tu conexión e inténtalo otra vez.' : error.message; $('auth-error').hidden = false; $('auth-status').textContent = ''; $('auth-submit').disabled = false } };
