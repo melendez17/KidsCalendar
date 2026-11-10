@@ -5,7 +5,8 @@ import { readFileSync } from 'node:fs';
 
 test('Dashboard carga la cuenta, guarda tareas y confirma el turno antes de jugar', async () => {
   const html = readFileSync(new URL('../dashboard.html', import.meta.url), 'utf8');
-  const script = html.match(/<script>([\s\S]*?)<\/script>/)[1];
+  const scriptPath = html.match(/<script src="([^"]+)"/)[1];
+  const script = readFileSync(new URL('../' + scriptPath, import.meta.url), 'utf8');
 
   const elements = new Map();
   const context2d = new Proxy({}, { get: (o, k) => o[k] || (() => {}) });

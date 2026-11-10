@@ -28,14 +28,14 @@
         <section class="auth-panel">
             <h2 id="auth-title">Tu cuenta familiar</h2>
             <p class="fine" id="auth-intro"></p>
-            <form id="auth-form"><label id="name-label">Tu nombre (adulto)<input name="name" id="name"
+            <form id="auth-form"><label id="name-label" hidden>Tu nombre (adulto)<input name="name" id="name"
                         autocomplete="name" maxlength="60"></label><label>Correo del adulto<input name="email"
                         type="email" id="email" required autocomplete="username"
                         maxlength="254"></label><label>Contraseña<span class="password-row"><input name="password"
                             id="password" type="password" required maxlength="128"
                             aria-describedby="password-help"><button id="show-password" type="button"
                             aria-pressed="false">Mostrar</button></span></label><small class="fine"
-                    id="password-help"></small><label class="consent" id="consent-label"><input id="consent"
+                    id="password-help"></small><label class="consent" id="consent-label" hidden><input id="consent"
                         type="checkbox">Soy una persona adulta y administraré esta cuenta familiar. Entiendo que su
                     información se guarda para organizar las tareas y el progreso.</label>
                 <div class="error" id="auth-error" role="alert" hidden></div><button type="submit"
@@ -45,6 +45,7 @@
             <p class="auth-switch" id="auth-switch"></p>
         </section>
     </main>
+    <script src="/auth.js" defer></script>
 </body>
 
 </html>

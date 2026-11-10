@@ -69,6 +69,16 @@ test('Registro, sesiones, aislamiento, conflictos y persistencia SQLite', async 
         assert.equal((await request('/dashboard')).status, 302);
         assert.equal((await request('/api/state')).status, 401);
         assert.equal((await request('/data/calendar.sqlite')).status, 404);
+        for (const page of ['/registro', '/login']) {
+            const response = await request(page);
+            assert.equal(response.status, 200);
+            assert.match(response.data, /<script\b[^>]*src="\/auth\.js"[^>]*>/);
+        }
+        for (const [path, type] of [['/auth.js', 'text/javascript'], ['/js/dashboard.js', 'text/javascript'], ['/styles/dashboard.css', 'text/css']]) {
+            const response = await request(path);
+            assert.equal(response.status, 200, path);
+            assert(response.headers.get('content-type').startsWith(type), path);
+        }
 
         const registration = {
             name: 'Familia Uno',
